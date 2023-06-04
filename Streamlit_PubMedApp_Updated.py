@@ -77,35 +77,37 @@ if query and max_query and dummy:
         st.error("Please configure your OpenAI API key!")
 
 
-    with st.form("my_form"):
-        user = st.text_input("Ask me any question about " + query + ":")
-        submitted = st.form_submit_button("Submit")
+with st.form("my_form"):
+    user = st.text_input("Ask me any question about " + query + ":")
+    submitted = st.form_submit_button("Submit")
 
+    try:
+        if user and index is not None:
+            query_engine = index.as_query_engine()
+            response = str(query_engine.query(user))   
+        # response = index.query(user)
+    except Exception as err:
+        st.error("User input or Index Error", err)
+
+    if submitted:
         try:
-            if user and index is not None:
-                response = index.query(user)
+            if not api_key_input:
+                st.error("Please enter Open Api Key!")
+            if not query:
+                st.error("Please enter a topic to discuss!")
+            if not max_query:
+                st.error("Please choose number of files to be loaded!")
+            if (query and max_query):
+                st.text_area("Medical Bot 👨‍⚕️", response, height=500)
+        except OpenAIError as e:
+            st.error(e._message)
+        except (RuntimeError, TypeError, NameError):
+            st.error("Runtime/Type/Name Error")
+        except OSError as err:
+            st.error("OS error:", err)
+        except ValueError:
+            st.error("Could not convert data to string.")
         except Exception as err:
-            st.error("User input or Index Error", err)
-
-        if submitted:
-            try:
-                if not api_key_input:
-                    st.error("Please enter Open Api Key!")
-                if not query:
-                    st.error("Please enter a topic to discuss!")
-                if not max_query:
-                    st.error("Please choose number of files to be loaded!")
-                if (query and max_query):
-                    st.text_area("Medical Bot 👨‍⚕️", response, height=500)
-            except OpenAIError as e:
-                st.error(e._message)
-            except (RuntimeError, TypeError, NameError):
-                st.error("Runtime/Type/Name Error")
-            except OSError as err:
-                st.error("OS error:", err)
-            except ValueError:
-                st.error("Could not convert data to string.")
-            except Exception as err:
-                st.error(f"Unexpected {err=}, {type(err)=}")
-            except ConnectionError as err:
-                st.error("Connection Error:", err)
+            st.error(f"Unexpected {err=}, {type(err)=}")
+        except ConnectionError as err:
+            st.error("Connection Error:", err)
