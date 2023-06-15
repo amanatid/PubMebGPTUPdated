@@ -29,7 +29,7 @@ st.header("⚕️PubMedGPT ")
 sidebar()
 st.subheader(
     "I am a PumMedGPT(Chatbot) Medical Scientist. Please fill the fields below to start our discussion.."
-    "If you find it useful, you can kindly donate here [Stripe](https://buy.stripe.com/cN2dUu44OahXaJO288)"
+    "If you find it useful, you can kindly donate here [Stripe](https://buy.stripe.com/6oEbMm0SCfChbNSfYZ)"
 )
 
 
