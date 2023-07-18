@@ -175,7 +175,7 @@ class PubmedReader_mod(BaseReader):
         for paper in pubmed_search:
             pubmed_documents.append(
                 Document(
-                    paper["text"],
+                    text=paper["text"],
                     extra_info={
                         "Title of this paper": paper["title"],
                         "Journal it was published in:": paper["journal"],
