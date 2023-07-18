@@ -1,5 +1,6 @@
 langchain
-llama-index==0.6.18
+llama-index==0.7.4
 openai
 streamlit
 fpdf
+pypdf
