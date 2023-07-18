@@ -1,4 +1,4 @@
-from llama_index import  GPTVectorStoreIndex,download_loader
+from llama_index import  VectorStoreIndex,download_loader
 from langchain.agents import initialize_agent, Tool
 from langchain.llms import OpenAI
 from langchain.chains.conversation.memory import ConversationBufferMemory
@@ -71,7 +71,9 @@ if query and max_query and dummy:
         # load the reader
         loader = PubmedReader_mod()
         documents = loader.load_data(search_query=query,max_results=max_query,search_criterion= search_query_int)
-        index =  GPTVectorStoreIndex.from_documents(documents)
+        
+        openai.api_key = api_key_input
+        index =  VectorStoreIndex.from_documents(documents)
         st.markdown("PumMed papers are loaded based on the criteria.")
     except Exception as e:
         st.error("Please configure your OpenAI API key!")
