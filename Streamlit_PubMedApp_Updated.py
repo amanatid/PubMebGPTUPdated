@@ -15,7 +15,7 @@ from  sidebar  import *
 
 
 # create the website reader
-PubmedReader = download_loader("PubmedReader")
+##########PubmedReader = download_loader("PubmedReader")
 global loader,documents, index,dummy
 
 loader = None
@@ -26,6 +26,13 @@ index = None
 st.set_page_config(page_title="My App")
 
 st.header("⚕️PubMedGPT ")
+st.subheader(
+     "Due to technical problems  the PubMedGPT is down. We are working to fix the problem."
+     "In the meanwhile exactly the same version can be visited in HuggingFace platform."
+     "Please click on the link [PubMedGPT](https://huggingface.co/spaces/amanatid/PubMedGPT)."
+)
+
+
 sidebar()
 st.subheader(
     "I am a PumMedGPT(Chatbot) Medical Scientist. Please fill the fields below to start our discussion....."
